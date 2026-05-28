@@ -27,7 +27,7 @@ export default function InputBox({ onSendMessage, disabled }) {
         <button
           type="submit"
           disabled={disabled}
-          className="shrink-0 rounded-md border border-orange-400/50 bg-orange-500 px-4 py-2.5 text-sm font-semibold text-[#070707] shadow-[0_8px_24px_rgba(249,115,22,0.18)] transition-colors hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-50"
+          className="shrink-0 rounded-md border border-orange-400/50 bg-orange-500 px-8 py-2.5 text-sm font-semibold text-[#070707] shadow-[0_8px_24px_rgba(249,115,22,0.18)] transition-colors hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Send
         </button>

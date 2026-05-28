@@ -14,20 +14,20 @@ export default function InputBox({ onSendMessage, disabled }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border-t">
-      <div className="flex gap-2 text-black ">
+    <form onSubmit={handleSubmit} className="shrink-0 border-t border-[#2a2b2a] bg-[#0f0f10] p-3 sm:p-4">
+      <div className="mx-auto flex w-full max-w-4xl gap-2">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={disabled}
           placeholder="Type your message..."
-          className="flex-1 p-2 border rounded-lg"
+          className="min-w-0 flex-1 rounded-md border border-[#2a2b2a] bg-[#070707] px-3 py-2.5 text-sm text-zinc-100 outline-none transition-colors placeholder:text-zinc-500 focus:border-orange-400 disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={disabled}
-          className="bg-blue-500 text-black px-4 py-2 rounded-lg disabled:opacity-50"
+          className="shrink-0 rounded-md border border-orange-400/50 bg-orange-500 px-4 py-2.5 text-sm font-semibold text-[#070707] shadow-[0_8px_24px_rgba(249,115,22,0.18)] transition-colors hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Send
         </button>

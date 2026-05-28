@@ -1,78 +1,31 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Menu, X } from 'lucide-react';
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
+export default function Navbar({ isSidebarOpen, onToggleSidebar }) {
   return (
-    <nav className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-slate-700 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
-      {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo/Title */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-            <span className="text-white font-bold text-lg">N</span>
+    <nav className="h-[73px] border-b border-[#2a2b2a] bg-[#0f0f10]/95 backdrop-blur">
+      <div className="flex h-full items-center justify-between px-4 sm:px-6">
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-emerald-400/30 bg-emerald-500 text-[#070707] shadow-[0_0_24px_rgba(16,185,129,0.24)]">
+            <span className="text-lg font-bold">N</span>
           </div>
-
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+          <h1 className="truncate text-xl font-semibold tracking-normal text-zinc-100 sm:text-2xl">
             Nexora
           </h1>
         </div>
 
-        {/* Hamburger Button */}
         <button
-          onClick={toggleMenu}
-          className="lg:hidden p-2 rounded-lg hover:bg-slate-700 transition-colors duration-300 text-slate-300 hover:text-white"
-          aria-label="Toggle menu"
+          type="button"
+          onClick={onToggleSidebar}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#2a2b2a] text-zinc-300 transition-colors hover:border-orange-400/70 hover:bg-orange-500 hover:text-[#070707] md:hidden"
+          aria-label="Toggle sidebar"
+          aria-expanded={isSidebarOpen}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
-
-      {/* Mobile Sidebar Menu */}
-      {isOpen && (
-        <div className="lg:hidden bg-slate-800 border-t border-slate-700 animate-in slide-in-from-top">
-          <div className="px-6 py-6 space-y-4">
-            <a
-              href="#home"
-              className="block px-4 py-3 rounded-lg bg-slate-700 text-cyan-400 font-semibold hover:bg-slate-600 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </a>
-
-            <a
-              href="#chat"
-              className="block px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors font-medium"
-              onClick={() => setIsOpen(false)}
-            >
-              Chat
-            </a>
-
-            <a
-              href="#models"
-              className="block px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors font-medium"
-              onClick={() => setIsOpen(false)}
-            >
-              Models
-            </a>
-
-            <a
-              href="#settings"
-              className="block px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors font-medium"
-              onClick={() => setIsOpen(false)}
-            >
-              Settings
-            </a>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }

@@ -11,6 +11,7 @@ export default function Home() {
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState('mistral');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchModels = async () => {
@@ -70,19 +71,32 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="flex h-screen bg-white">
+    <div className="h-dvh overflow-hidden bg-[#070707] text-zinc-100">
+      <Navbar
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={() => setIsSidebarOpen((open) => !open)}
+      />
+      <div className="relative flex h-[calc(100dvh-73px)] overflow-hidden bg-[#070707]">
         <Sidebar
           models={models}
           selectedModel={selectedModel}
           onSelectModel={setSelectedModel}
           onNewChat={handleNewChat}
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
         />
-        <div className="flex-1 flex flex-col">
+        {isSidebarOpen && (
+          <button
+            type="button"
+            aria-label="Close sidebar"
+            className="fixed inset-0 z-30 bg-black/50 backdrop-blur-[1px] md:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+        <main className="flex min-w-0 flex-1 flex-col">
           <ChatWindow messages={messages} />
           <InputBox onSendMessage={handleSendMessage} disabled={isLoading} />
-        </div>
+        </main>
       </div>
     </div>
   );

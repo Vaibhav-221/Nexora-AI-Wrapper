@@ -4,8 +4,8 @@ export default function ChatWindow({ messages }) {
   // If messages is not an array, return empty
   if (!Array.isArray(messages)) {
     return (
-      <div className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
-        <p className="text-slate-400">Start a conversation...</p>
+      <div className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto bg-[#070707] p-4 sm:p-6">
+        <p className="text-sm text-zinc-500">Start a conversation...</p>
       </div>
     );
   }
@@ -13,15 +13,15 @@ export default function ChatWindow({ messages }) {
   // If no messages, show welcome
   if (messages.length === 0) {
     return (
-      <div className="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center">
-        <p className="text-slate-400 text-lg">Start a conversation with Nexora AI...</p>
+      <div className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto bg-[#070707] p-4 sm:p-6">
+        <p className="text-center text-sm text-zinc-500 sm:text-base">Start a conversation with Nexora AI...</p>
       </div>
     );
   }
 
   // Render messages
   return (
-    <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-slate-900 to-slate-950">
+    <div className="min-h-0 flex-1 space-y-4 overflow-y-auto bg-[#070707] p-4 sm:p-6">
       {messages.map((msg, index) => {
         // Safety check
         if (!msg || !msg.content) {
@@ -34,13 +34,13 @@ export default function ChatWindow({ messages }) {
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+              className={`max-w-[85%] rounded-md border px-4 py-2.5 sm:max-w-[70%] lg:max-w-2xl ${
                 msg.role === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-slate-700 text-slate-100'
+                  ? 'border-emerald-400/40 bg-emerald-500 text-[#070707]'
+                  : 'border-[#2a2b2a] bg-[#0f0f10] text-zinc-200'
               }`}
             >
-              <p className="text-sm">{msg.content}</p>
+              <p className="whitespace-pre-wrap break-words text-sm leading-6">{msg.content}</p>
             </div>
           </div>
         );

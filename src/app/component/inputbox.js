@@ -15,7 +15,7 @@ export default function InputBox({ onSendMessage, disabled }) {
 
   return (
     <form onSubmit={handleSubmit} className="p-4 border-t">
-      <div className="flex gap-2">
+      <div className="flex gap-2 text-black ">
         <input
           type="text"
           value={input}
@@ -27,7 +27,7 @@ export default function InputBox({ onSendMessage, disabled }) {
         <button
           type="submit"
           disabled={disabled}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          className="bg-blue-500 text-black px-4 py-2 rounded-lg disabled:opacity-50"
         >
           Send
         </button>

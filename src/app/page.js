@@ -12,7 +12,6 @@ export default function Home() {
   const [selectedModel, setSelectedModel] = useState('mistral');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch available models on mount
   useEffect(() => {
     const fetchModels = async () => {
       try {
@@ -30,9 +29,11 @@ export default function Home() {
     fetchModels();
   }, []);
 
-  // Handle sending message
   const handleSendMessage = async (userMessage) => {
-    setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
+    if (!userMessage.trim()) return;
+
+    const updatedMessages = [...messages, { role: 'user', content: userMessage }];
+    setMessages(updatedMessages);
     setIsLoading(true);
 
     try {
@@ -42,24 +43,28 @@ export default function Home() {
         body: JSON.stringify({
           message: userMessage,
           model: selectedModel,
-          messages: messages
+          messages: updatedMessages
         })
       });
 
       const data = await response.json();
-      setMessages((prev) => [...prev, { role: 'assistant', content: data.message }]);
-    } catch (error) {
-      console.error('Error sending message:', error);
+
+      // Add assistant message
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: 'Error: Could not get response' }
+        { role: 'assistant', content: data.message || 'No response' }
+      ]);
+    } catch (error) {
+      console.error('Error:', error);
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: 'Error: Could not connect to Ollama' }
       ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Handle new chat
   const handleNewChat = () => {
     setMessages([]);
   };

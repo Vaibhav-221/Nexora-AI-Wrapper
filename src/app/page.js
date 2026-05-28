@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import ChatWindow from './component/chatwindow';
 import InputBox from './component/inputbox';
 import Sidebar from './component/sidebar';
+import Navbar from './component/navbar';
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -64,16 +65,19 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen bg-white">
-      <Sidebar
-        models={models}
-        selectedModel={selectedModel}
-        onSelectModel={setSelectedModel}
-        onNewChat={handleNewChat}
-      />
-      <div className="flex-1 flex flex-col">
-        <ChatWindow messages={messages} />
-        <InputBox onSendMessage={handleSendMessage} disabled={isLoading} />
+    <div>
+      <Navbar />
+      <div className="flex h-screen bg-white">
+        <Sidebar
+          models={models}
+          selectedModel={selectedModel}
+          onSelectModel={setSelectedModel}
+          onNewChat={handleNewChat}
+        />
+        <div className="flex-1 flex flex-col">
+          <ChatWindow messages={messages} />
+          <InputBox onSendMessage={handleSendMessage} disabled={isLoading} />
+        </div>
       </div>
     </div>
   );
